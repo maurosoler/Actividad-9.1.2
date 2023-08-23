@@ -28,8 +28,12 @@ const strangeArray = [
 function showList(array) {
   const container = document.getElementById("list");
   container.innerHTML = "";
-  // Más info de forEach => https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
-  array.forEach((element) => {
+
+  // Acá está la solución ! Primero filtramos solamente los Strings, luego los ordenamos
+  const arrayFiltrado = array.filter((element) => typeof element === "string");
+  const arrayOrdenado = arrayFiltrado.sort( (a,b) => {return a.localeCompare(b) }) ;
+  //------------------------------------------------------------------------------------
+  arrayOrdenado.forEach((element) => {    //Se cambió "array.forEach" x "arrayOrdenado.forEach"
     const li = document.createElement("li");
     li.appendChild(document.createTextNode(element));
     container.appendChild(li);
@@ -37,6 +41,5 @@ function showList(array) {
 }
 
 document.addEventListener("DOMContentLoaded", (e) => {
-  // Escribe tu solución aquí
-  // Sugerencia de cómo mostrar el array => showList(strangeArray);
+showList(strangeArray);
 });
